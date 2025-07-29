@@ -1,0 +1,166 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.flow-builder {
+  flex-grow: 1;
+  position: relative; /* important for positioning children like the top bar */
+}
+
+
+/* --- The bar at the top --- */
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  padding: 20px;
+  z-index: 10; /* gotta be on top of the flow canvas */
+  pointer-events: none; /* so you can click 'through' it */
+}
+
+.notification {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+.notification.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+.notification.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.save-button {
+  position: absolute; /* positioned relative to its parent, .flow-builder */
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+  pointer-events: all; /* but the button itself should be clickable */
+  font-weight: bold;
+}
+
+
+/* --- Right Side Panel --- */
+.panel {
+  width: 300px;
+  border-left: 1px solid #e0e0e0;
+  background-color: #f7f8fa;
+  box-sizing: border-box;
+}
+
+/* Draggable node in the panel */
+.nodes-panel {
+  padding: 20px;
+}
+.node-item {
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid #007bff;
+  color: #007bff;
+  background-color: white;
+  text-align: center;
+  cursor: grab;
+  margin-bottom: 15px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.node-item:hover {
+  background-color: #007bff;
+  color: white;
+  /* transform: scale(1.05); */ /* maybe add this later, looks cool */
+}
+
+
+/* --- Settings Panel when a node is selected --- */
+.settings-panel {
+  padding: 0;
+}
+.settings-panel .header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.settings-panel .back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 0 10px 0 0;
+}
+.settings-panel .header-title {
+  flex-grow: 1;
+  text-align: center;
+  font-weight: bold;
+  padding-right: 34px; /* weird padding to keep the title centered because of the back button */
+}
+.settings-panel .form {
+  padding: 20px;
+}
+.settings-panel .label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+.settings-panel .input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+/* --- The Actual Node on the Canvas --- */
+.text-node {
+  border-radius: 8px;
+  background-color: white;
+  width: 220px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e0e0e0;
+}
+.text-node.selected {
+  outline: 2px solid #007bff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.text-node .header {
+  background-color: #b2f0e3;
+  padding: 8px 12px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-node .content {
+  padding: 12px;
+  font-size: 14px;
+  color: #333;
+}
